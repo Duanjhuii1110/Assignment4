@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="5BKK00F3gDzKGS5dfyjwof">
+<head data-page-node-id="VIsumdFdQbltPvnV5wJRC3">
+<meta charset="utf-8" data-page-node-id="qhjJwQ32gZzTCiiCHtLW2G">
+<meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="RS45oU4zjwflJhELTBHnnO">
+<title>一个判了死刑的人，又活了二十年 · 孙小果案</title>
+<style>
+  :root{
+    --ink:#14110C;
+    --paper:#EFE7D8;
+    --dark:#100E0B;
+    --red:#B7281C;
+    --red-br:#CE3B2C;
+    --cream:#F1E8D6;
+    --sans:"PingFang SC","Microsoft YaHei","Source Han Sans SC","Noto Sans SC",-apple-system,"Segoe UI",Roboto,sans-serif;
+    --serif:"Georgia","Times New Roman","Songti SC","STSong","SimSun",serif;
+    --cjk:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif;
+    --mono:"Courier New","Courier",Consolas,monospace;
+    --ease:cubic-bezier(.22,.8,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--dark);color:var(--cream);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--red);color:#fff}
+
+  .mono{font-family:var(--mono);font-size:clamp(9px,.72vw,10.5px);letter-spacing:.2em;text-transform:uppercase}
+
+  /* ============ deck ============ */
+  .deck{position:fixed;inset:0}
+  .page{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    padding:clamp(20px,4vh,44px) clamp(24px,6vw,96px) clamp(58px,8.5vh,80px);
+    opacity:0;visibility:hidden;transform:translateY(24px);
+    transition:opacity .55s ease,transform .7s var(--ease),visibility .55s;
+    overflow:hidden;
+  }
+  .page.is-active{opacity:1;visibility:visible;transform:none;z-index:2}
+  .page.is-out{opacity:0;transform:translateY(-14px);z-index:1}
+
+  .page--dark{background:radial-gradient(120% 100% at 80% 0%,#1A1712 0%,#100E0B 55%);color:var(--cream)}
+  .page--paper{background:radial-gradient(120% 100% at 90% 0%,#F6EFE1 0%,#EFE7D8 45%,#E5DBC7 100%);color:var(--ink)}
+
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.3;mix-blend-mode:overlay;
+    background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 3px);
+    animation:grainFlick 8s steps(5) infinite}
+  .page--paper .grain{mix-blend-mode:multiply;opacity:.26;
+    background-image:repeating-linear-gradient(0deg,rgba(90,72,44,.09) 0 1px,transparent 1px 3px)}
+  @keyframes grainFlick{0%,100%{opacity:.24}30%{opacity:.32}60%{opacity:.2}80%{opacity:.3}}
+
+  .topbar{display:flex;justify-content:space-between;align-items:baseline;gap:18px;opacity:.62;flex:0 0 auto}
+  .page--paper .topbar{opacity:.5}
+  .main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2.4vh,26px);padding:clamp(18px,4vh,48px) 0;min-height:0}
+  .foot{
+    display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+    padding-top:clamp(10px,1.8vh,16px);border-top:1px solid rgba(241,232,214,.16);opacity:.55;flex:0 0 auto;
+  }
+  .page--paper .foot{border-top-color:rgba(20,17,12,.2);opacity:.5}
+
+  /* reveal */
+  .rise{opacity:0;transform:translateY(18px)}
+  .page.is-active .rise{animation:rise .85s var(--ease) forwards;animation-delay:var(--d,0s)}
+  html:not(.with-intro) .page:first-child .rise{animation-delay:calc(var(--d,0s) - 1.85s)}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* type */
+  .kicker{font-size:clamp(11px,1vw,13px);letter-spacing:.28em;opacity:.6}
+  .hl{
+    font-family:var(--sans);font-weight:700;
+    font-size:clamp(1.85rem,4.1vw,3.5rem);
+    line-height:1.24;letter-spacing:.01em;
+  }
+  .hl em{font-style:normal;color:var(--red-br)}
+  .page--paper .hl em{color:var(--red)}
+  .en{font-family:var(--mono);font-size:clamp(10px,.85vw,12px);letter-spacing:.3em;text-transform:uppercase;opacity:.5}
+  .lead{
+    font-family:var(--cjk);font-size:clamp(13px,1.16vw,15.5px);line-height:2.05;
+    letter-spacing:.03em;max-width:800px;
+  }
+  .page--dark .lead{color:rgba(241,232,214,.74)}
+  .page--paper .lead{color:rgba(20,17,12,.76)}
+  .lead b{font-weight:400;border-bottom:1px solid rgba(183,40,28,.55);padding-bottom:1px}
+  .dot{display:inline-block;width:.42em;height:.42em;border-radius:50%;background:var(--red-br);vertical-align:.08em;margin-left:.28em}
+  .page--paper .dot{background:var(--red)}
+
+  /* ghost char */
+  .ghost{
+    position:absolute;right:-.06em;top:50%;transform:translateY(-50%);
+    font-family:var(--cjk);font-size:min(78vh,52vw);line-height:.8;font-weight:700;
+    color:rgba(241,232,214,.045);pointer-events:none;user-select:none;
+  }
+  .page--paper .ghost{color:rgba(20,17,12,.045)}
+
+  /* ============ intro ============ */
+  .intro{position:fixed;inset:0;z-index:80}
+  .half{position:absolute;top:0;bottom:0;width:50.05%;overflow:hidden;transition:transform 1.2s cubic-bezier(.76,0,.24,1)}
+  .half--l{left:0;background:var(--dark)}
+  .half--r{right:0;background:var(--red)}
+  html.is-open .half--l{transform:translateY(-101%)}
+  html.is-open .half--r{transform:translateY(101%)}
+  .half .gchar{
+    position:absolute;top:50%;transform:translate(-50%,-50%);
+    font-family:var(--cjk);font-size:min(76vh,52vw);line-height:.8;font-weight:700;
+  }
+  .half--l .gchar{left:100%;color:rgba(241,232,214,.075)}
+  .half--r .gchar{left:0;color:rgba(0,0,0,.17)}
+  .intro-inner{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:clamp(14px,2.6vh,26px);text-align:center;pointer-events:none;
+    transition:opacity .55s ease,transform .6s var(--ease);
+  }
+  html.is-open .intro-inner{opacity:0;transform:translateY(-10px)}
+  .ring{
+    width:clamp(96px,11vw,140px);aspect-ratio:1;border:1px solid rgba(255,255,255,.52);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;line-height:1.9;
+    color:rgba(255,255,255,.64);text-transform:uppercase;
+  }
+  .intro-title{
+    font-family:var(--sans);font-weight:700;font-size:clamp(2rem,5.4vw,4.4rem);
+    line-height:1.16;letter-spacing:.02em;color:#FBF6EA;
+    text-shadow:0 2px 40px rgba(0,0,0,.3);
+  }
+  .intro-title em{font-style:normal;display:block;font-size:.36em;letter-spacing:.34em;font-weight:400;margin-top:1.1em;opacity:.78}
+  .intro-meta{font-family:var(--mono);font-size:clamp(8.5px,.72vw,10px);letter-spacing:.3em;color:rgba(255,255,255,.62);text-transform:uppercase}
+  .intro .fade-in{opacity:0;animation:fadeIn .9s var(--ease) forwards;animation-delay:var(--d,0s)}
+  @keyframes fadeIn{to{opacity:1}}
+
+  /* ============ rail ============ */
+  .rail{
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
+    display:flex;align-items:center;gap:14px;
+    padding:clamp(9px,1.5vh,15px) clamp(24px,6vw,96px);
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    transition:color .5s;pointer-events:none;
+  }
+  body[data-tone="dark"] .rail{color:rgba(241,232,214,.58)}
+  body[data-tone="paper"] .rail{color:rgba(20,17,12,.45)}
+  .rail .grow{flex:1}
+  .ticks{display:flex;align-items:center;gap:5px}
+  .ticks i{width:16px;height:2px;display:block;background:currentColor;opacity:.26;transition:height .3s,opacity .3s}
+  .ticks i.on{opacity:.95;height:4px}
+  .rail button{pointer-events:auto;appearance:none;background:none;border:0;font:inherit;letter-spacing:inherit;
+    text-transform:inherit;color:inherit;cursor:pointer;padding:6px 2px;transition:opacity .2s}
+  .rail button:hover{opacity:.6}
+  .rail button:disabled{opacity:.16;cursor:default}
+  .hint{opacity:.55}
+
+  /* ============ p2 contents + timeline ============ */
+  .cols{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,64px);align-items:start}
+  .contents{list-style:none;border-top:1px solid rgba(20,17,12,.24)}
+  .contents li{
+    display:grid;grid-template-columns:2.2em 1fr auto 2.6em;align-items:baseline;gap:12px;
+    padding:clamp(10px,1.7vh,17px) 0;border-bottom:1px solid rgba(20,17,12,.14);
+  }
+  .contents .num{font-family:var(--serif);font-size:clamp(13px,1.2vw,16px);color:var(--red)}
+  .contents .t{font-size:clamp(15px,1.5vw,19px);font-weight:600;letter-spacing:.04em}
+  .contents .e{font-family:var(--mono);font-size:9px;letter-spacing:.18em;opacity:.45;text-transform:uppercase}
+  .contents .pg{font-family:var(--mono);font-size:10px;opacity:.4;text-align:right}
+
+  .tl{list-style:none;position:relative;padding-left:18px}
+  .tl::before{content:"";position:absolute;left:3px;top:6px;bottom:6px;width:1px;background:rgba(20,17,12,.22)}
+  .tl li{position:relative;display:flex;gap:14px;align-items:baseline;padding:clamp(5px,1vh,9px) 0}
+  .tl li::before{content:"";position:absolute;left:-18px;top:.68em;width:7px;height:7px;border-radius:50%;background:rgba(20,17,12,.3)}
+  .tl li.key::before{background:var(--red);box-shadow:0 0 0 4px rgba(183,40,28,.14)}
+  .tl b{font-family:var(--serif);font-size:clamp(12px,1.05vw,14px);font-weight:400;letter-spacing:.04em;min-width:4.4em}
+  .tl span{font-size:clamp(12px,1.05vw,13.5px);letter-spacing:.04em;opacity:.7}
+  .tl li.key span{opacity:.95}
+
+  /* ============ p3 exhibits ============ */
+  .ex-row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,44px);border-top:1px solid rgba(241,232,214,.22);padding-top:clamp(14px,2.4vh,26px)}
+  .ex .idx{font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);line-height:1;color:var(--red-br);opacity:.9}
+  .ex .dt{font-family:var(--mono);font-size:10px;letter-spacing:.2em;margin:.9em 0 .7em;opacity:.55}
+  .ex p{font-family:var(--cjk);font-size:clamp(12.5px,1.08vw,14.5px);line-height:1.95;color:rgba(241,232,214,.78);letter-spacing:.02em}
+  .aside-note{
+    font-family:var(--cjk);font-size:clamp(12.5px,1.08vw,14.5px);line-height:1.95;
+    border-left:2px solid var(--red-br);padding-left:14px;color:rgba(241,232,214,.82);
+  }
+  .page--paper .aside-note{border-left-color:var(--red);color:rgba(20,17,12,.8)}
+
+  /* ============ verdict p4 ============ */
+  .verdict{display:grid;grid-template-columns:1fr auto;gap:clamp(20px,4vw,56px);align-items:center}
+  .charges{list-style:none;display:flex;flex-wrap:wrap;gap:8px 10px}
+  .charges li{font-size:clamp(11px,1vw,13px);letter-spacing:.06em;padding:.42em .8em;border:1px solid rgba(20,17,12,.3);color:rgba(20,17,12,.82)}
+  .stampbox{
+    border:3px solid var(--red);color:var(--red);padding:clamp(14px,2.4vh,22px) clamp(20px,2.6vw,34px);
+    transform:rotate(-4deg);text-align:center;
+  }
+  .stampbox b{display:block;font-size:clamp(30px,4.2vw,58px);line-height:1;letter-spacing:.08em;font-weight:700}
+  .stampbox span{display:block;margin-top:.5em;font-family:var(--mono);font-size:9px;letter-spacing:.2em;opacity:.8}
+
+  /* ============ chain p5 ============ */
+  .chain{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:clamp(10px,1.6vw,22px)}
+  .chain .cell{border-top:2px solid rgba(241,232,214,.3);padding-top:14px}
+  .chain .cell.hot{border-top-color:var(--red-br)}
+  .chain .y{font-family:var(--serif);font-size:clamp(11px,1vw,13px);letter-spacing:.16em;opacity:.6}
+  .chain .v{font-size:clamp(17px,2vw,26px);font-weight:700;margin-top:.35em;letter-spacing:.04em}
+  .chain .s{font-family:var(--cjk);font-size:clamp(11px,.95vw,12.5px);margin-top:.5em;opacity:.62;line-height:1.7}
+  .chain .arw{font-family:var(--mono);opacity:.4;font-size:12px}
+
+  /* ============ stats ============ */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:clamp(16px,2.6vw,40px);border-top:1px solid currentColor;padding-top:clamp(14px,2.2vh,22px);opacity:.95}
+  .stat .n{font-family:var(--serif);font-size:clamp(32px,5vw,68px);line-height:.95;letter-spacing:-.02em}
+  .stat .n small{font-size:.34em;letter-spacing:.04em;margin-left:.18em}
+  .stat .c{font-size:clamp(11px,.95vw,12.5px);line-height:1.85;margin-top:.8em;opacity:.62;letter-spacing:.03em}
+  .page--paper .stats{border-top-color:rgba(20,17,12,.32)}
+  .page--dark .stats{border-top-color:rgba(241,232,214,.3)}
+
+  /* ============ missing p7 ============ */
+  .missing-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3.4vw,54px);align-items:stretch}
+  .missing{
+    border:1px dashed rgba(241,232,214,.38);padding:clamp(18px,3vh,30px);
+    display:flex;flex-direction:column;justify-content:center;gap:.9em;
+  }
+  .missing .tag{font-family:var(--mono);font-size:9px;letter-spacing:.24em;color:var(--red-br);text-transform:uppercase}
+  .missing .t{font-size:clamp(19px,2.2vw,28px);font-weight:700;letter-spacing:.18em}
+  .missing p{font-family:var(--cjk);font-size:clamp(12px,1.02vw,13.5px);line-height:1.95;opacity:.62}
+  .patent{
+    border:1px solid rgba(241,232,214,.26);padding:clamp(18px,3vh,30px);
+    display:flex;flex-direction:column;justify-content:space-between;gap:1em;
+    background:rgba(241,232,214,.035);
+  }
+  .patent .seal{
+    align-self:flex-end;border:2px solid rgba(206,59,44,.85);color:rgba(206,59,44,.92);
+    padding:.4em .6em;font-size:clamp(10px,.9vw,12px);letter-spacing:.22em;transform:rotate(-6deg);
+  }
+  .patent .name{font-size:clamp(15px,1.55vw,19px);font-weight:600;line-height:1.7;letter-spacing:.03em}
+  .patent .meta2{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;opacity:.45;text-transform:uppercase}
+
+  /* ============ steps p8 ============ */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.6vw,38px);border-top:1px solid rgba(20,17,12,.26);padding-top:clamp(14px,2.2vh,22px)}
+  .step .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--red)}
+  .step .t{font-size:clamp(14px,1.3vw,17px);font-weight:700;margin:.6em 0 .5em;letter-spacing:.04em}
+  .step p{font-family:var(--cjk);font-size:clamp(11.5px,1vw,13px);line-height:1.9;color:rgba(20,17,12,.7)}
+
+  /* ============ sources p10 ============ */
+  .srcs{list-style:none;border-top:1px solid rgba(20,17,12,.24)}
+  .srcs li{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:clamp(8px,1.4vh,13px) 0;border-bottom:1px solid rgba(20,17,12,.12)}
+  .srcs .i{font-family:var(--mono);font-size:9.5px;opacity:.4;letter-spacing:.14em;padding-top:.35em}
+  .srcs .x{font-size:clamp(12px,1.08vw,13.5px);line-height:1.85;letter-spacing:.02em;color:rgba(20,17,12,.82)}
+  .sign-off{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;opacity:.6}
+
+  /* ============ editor layer ============ */
+  .edbtn{
+    pointer-events:auto;padding:5px 9px!important;border:1px solid currentColor!important;
+    letter-spacing:.16em!important;opacity:.7;
+  }
+  .edbtn[aria-pressed="true"]{background:var(--red);color:#F7F0E1;border-color:var(--red)!important;opacity:1}
+  .marginalia{
+    position:absolute;right:clamp(20px,4.2vw,68px);bottom:clamp(96px,13.4vh,138px);
+    width:min(310px,25vw);z-index:6;
+    padding:clamp(12px,1.6vh,18px) clamp(13px,1.5vw,18px) clamp(11px,1.4vh,15px);
+    background:#F4EDDD;color:#241F18;
+    border-left:3px solid var(--red);
+    font-family:var(--cjk);font-size:clamp(11px,1vw,12.8px);line-height:1.95;letter-spacing:.02em;
+    box-shadow:0 18px 40px rgba(0,0,0,.36);
+    opacity:0;transform:translateY(12px) rotate(-1deg);
+    transition:opacity .45s ease,transform .55s var(--ease);
+    pointer-events:none;
+  }
+  .marginalia::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:5px;
+    background:repeating-linear-gradient(90deg,rgba(183,40,28,.45) 0 2px,transparent 2px 7px);
+  }
+  .marginalia .mno{
+    display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.24em;
+    color:var(--red);text-transform:uppercase;margin-bottom:.62em;
+  }
+  html.editor .page.is-active .marginalia{opacity:1;transform:rotate(-1deg);pointer-events:auto}
+
+  /* p5 strike slip */
+  .slip{
+    position:relative;align-self:flex-start;max-width:min(580px,95%);
+    background:#F7F0E1;color:#1B1710;
+    padding:clamp(13px,2vh,19px) clamp(16px,2.4vw,26px) clamp(15px,2.4vh,24px);
+    transform:rotate(-.8deg);box-shadow:0 20px 46px rgba(0,0,0,.42);
+  }
+  .slip .st{font-family:var(--mono);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.45;margin-bottom:.85em}
+  .slip .line{font-family:var(--cjk);font-size:clamp(13px,1.25vw,16.5px);letter-spacing:.06em;line-height:1.95}
+  .slip .line del{position:relative;text-decoration:none;color:rgba(20,17,12,.42);padding:0 .06em}
+  .slip .line del::after,.slip .line del::before{
+    content:"";position:absolute;left:-6%;right:-6%;top:52%;height:2px;background:var(--red);
+    transform:scaleX(0);transform-origin:left center;
+  }
+  .slip .line del::before{transform:rotate(-8deg) scaleX(0)}
+  .page.is-active .slip .line del::after{animation:strike .45s ease .95s forwards}
+  .page.is-active .slip .line del::before{animation:strike2 .45s ease 1.08s forwards}
+  @keyframes strike{to{transform:scaleX(1)}}
+  @keyframes strike2{to{transform:rotate(-8deg) scaleX(1)}}
+  .slip .hand{margin-top:.8em;padding-right:clamp(56px,7vw,96px);font-family:var(--cjk);font-size:clamp(12px,1.15vw,14.5px);color:var(--red);letter-spacing:.07em;opacity:0}
+  .page.is-active .slip .hand{animation:fadeIn .55s ease 1.55s forwards}
+  .slip .stamp2{
+    position:absolute;right:clamp(12px,1.6vw,22px);bottom:clamp(11px,1.6vh,17px);
+    border:2px solid rgba(183,40,28,.62);color:rgba(183,40,28,.78);
+    font-family:var(--cjk);font-size:clamp(11px,1vw,13px);letter-spacing:.3em;text-indent:.3em;
+    padding:.34em .28em .28em .56em;transform:rotate(-8deg);
+  }
+  html.static .slip .line del::after{transform:scaleX(1)}
+  html.static .slip .line del::before{transform:rotate(-8deg) scaleX(1)}
+  html.static .slip .hand{opacity:1}
+
+  /* p8 name reveal */
+  .name-line{font-size:clamp(15px,1.55vw,19.5px)!important;letter-spacing:.05em}
+  .rname{position:relative;display:inline-block;color:var(--red);font-weight:700;letter-spacing:.03em}
+  .rname .bar{position:absolute;inset:-.08em -.2em;background:#171310;transform-origin:right center}
+  .page.is-active .rname .bar{animation:unveil .95s var(--ease) 1.3s forwards}
+  @keyframes unveil{to{transform:scaleX(0)}}
+  html.static .rname .bar{display:none}
+
+  /* ============ responsive ============ */
+  @media (max-width:900px){
+    .marginalia{left:14px;right:14px;width:auto;bottom:clamp(56px,8vh,72px);transform:none}
+    html.editor .page.is-active .marginalia{transform:none}
+    .cols,.missing-wrap{grid-template-columns:1fr}
+    .ex-row,.steps{grid-template-columns:1fr;gap:18px}
+    .verdict{grid-template-columns:1fr}
+    .chain{grid-template-columns:1fr;gap:6px}
+    .chain .arw{display:none}
+    .chain .cell{padding:10px 0;border-top:1px solid rgba(241,232,214,.2)}
+    .ghost{font-size:58vh}
+    .stat .n{font-size:clamp(28px,7vw,44px)}
+  }
+  @media (max-width:640px){
+    .hint{display:none}
+    .hide-s{display:none}
+    .rail,.foot{flex-wrap:wrap;row-gap:6px}
+    .hl{font-size:1.5rem}
+    .contents li{grid-template-columns:1.8em 1fr auto;gap:8px}
+    .contents .e{display:none}
+  }
+  html.static .rise,html.static .intro .fade-in{opacity:1!important;transform:none!important;animation:none!important}
+  @media (prefers-reduced-motion:reduce){
+    .page{transition:opacity .25s;transform:none!important}
+    .page .rise{animation:none!important;opacity:1!important;transform:none!important}
+    .grain{animation:none}
+    .half{transition:none}
+  }
+</style>
+</head>
+<body data-tone="dark" data-page-node-id="elhcLhhMlACg18VCpmfL78">
+
+<div class="intro" id="intro" data-page-node-id="1rdPqx934BZjcdcRevCLTF">
+  <div class="half half--l" data-page-node-id="HuIUpmntsco2cVUSExBXgJ"><span class="gchar" data-page-node-id="YqDQV78rh7AAHBBgz4cBSE">死</span></div>
+  <div class="half half--r" data-page-node-id="mLHC9zfhneg2QvWalN9BNh"><span class="gchar" data-page-node-id="dReHIxAutN5j9cHE3NHTy7">死</span></div>
+  <div class="intro-inner" data-page-node-id="aMO8v0G2UMoFHNqyDaaQpd">
+    <div class="ring fade-in" style="--d:.15s" data-page-node-id="2hYp4Z5roSqKmxBzEGotac">Magpie File<br data-page-node-id="cIBPqnT0bF4NxUgzXWpjjR">1994—2020</div>
+    <h1 class="intro-title fade-in" style="--d:.3s" data-page-node-id="rYJuRNUWH0qXVCqqw3J4fl">一个判了死刑的人<em data-page-node-id="qrHHq0YYuDHhPFMqDhYKTe">The Man Who Came Back</em></h1>
+    <p class="intro-meta fade-in" style="--d:.52s" data-page-node-id="b7U6KT2lU7ahrscytY7Jvq">孙小果案 · 十页 · 一九九四 — 二〇二〇</p>
+  </div>
+</div>
+
+<main class="deck" id="deck" data-page-node-id="rKsv8SWF4mB0gvUm0FaEUw">
+
+  <!-- 01 ============ 封面 ============ -->
+  <section class="page page--dark is-active" data-tone="dark" aria-label="封面" data-page-node-id="X81PqQcwr1b3jT4yED6Lyd">
+    <div class="grain" data-page-node-id="7wtZYasAZAyTGg4aS4C2AD"></div>
+    <span class="ghost" data-page-node-id="NQ1Mj3ZHlhR7MiaIMieQE7">死</span>
+    <header class="topbar rise" style="--d:1.9s" data-page-node-id="4mYJiHDJIvCY8FYFN9Xqim">
+      <span class="mono" data-page-node-id="iX1tBPG7Pv4gTKA7fGgIAM">File No. YN 1994—2020</span>
+      <span class="mono" data-page-node-id="RBI0aBbBFShrgWEqEFkWIS">01 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="y7wOAXEqlTrjvDByOxztXA">
+      <p class="kicker rise" style="--d:2s" data-page-node-id="VTzyk6F49I1PyLEu2O2nDi">孙小果案 · 一份被改写过的卷宗</p>
+      <h1 class="hl rise" style="--d:2.06s" data-page-node-id="YIFdb2NGuJHZdC0AEzNbVc">一个判了死刑的人<br data-page-node-id="CG0LZBGotv1REb9MZznQKG">又活了二十年<span class="dot" data-page-node-id="guBZVLzIaVJDWA6jcQnIGW"></span></h1>
+      <p class="en rise" style="--d:2.16s" data-page-node-id="fgRDa1X8XTcTYdVjsVxnNx">One for sorrow &nbsp;·&nbsp; Ten chapters</p>
+      <p class="lead rise" style="--d:2.24s" data-page-node-id="j60S0Lw35V7VA5fbppGyoi">死刑 · 死缓 · 二十年 · 死刑。<br data-page-node-id="LkZEZEALdfA9iZyKBkPPVg">同一个人，同一份卷宗，四种写法。</p>
+    </div>
+    <footer class="foot rise" style="--d:2.34s" data-page-node-id="TFmx7lVYDqVjBfBRzcukRN">
+      <span class="mono" data-page-node-id="X7FsCnv2FOvUetdahYPpzF">新闻传播学 · 2025106079 段佳慧</span>
+      <span class="mono" data-page-node-id="tMcDu5xJXp8FSz7YEOsnk8">2026.11</span>
+    </footer>
+  </section>
+
+  <!-- 02 ============ 目录 ============ -->
+  <section class="page page--paper" data-tone="paper" aria-label="目录与时间线" data-page-node-id="fmHE5LROr4ZacNgHNp90R5">
+    <div class="grain" data-page-node-id="hXiCmGDRd8AAubd0QhD5Df"></div>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="0rCWWKPguPc1GaUwZXORu4">
+      <span class="mono" data-page-node-id="VsNSWWk6D47MWDq6gDdnvZ">Chapter Two · Two for joy</span>
+      <span class="mono" data-page-node-id="HwyULtGDwJYFcQzYcT7PVr">02 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="yRkagyz6z6CLyhNyqN7hG0">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="tL0DzjELZaaBmpwhQ3UjHE">十页，<em data-page-node-id="7sXofM5Fpd1CQm8YNJzKGM">一个被改写的名字</em></h2>
+      <p class="lead rise" style="--d:.14s" data-page-node-id="ZdHm5ANACUH9pPWcES4So1">这不是一桩没人管的案子。它是一桩被反复经手、反复签字、反复改判的案子——每一道手续上都有名字。</p>
+      <div class="cols" data-page-node-id="CHaGhlZ8NtD2DZN9qbe0dq">
+        <ol class="contents rise" style="--d:.2s" data-page-node-id="JaMMEjPI3ioMmqLblbAIQg">
+          <li data-page-node-id="nsUn8SJSr20beJal7G1A30"><span class="num" data-page-node-id="IWiQPpjm7bOQhOIQT3rw2E">Ⅰ</span><span class="t" data-page-node-id="8f7AAMFBBCn9Uiably1sGu">作案</span><span class="e" data-page-node-id="GtvxjAYzM7SyhFiVNxgkCI">The Crimes</span><span class="pg" data-page-node-id="FtLH5dxE8eZkBIZQAkHigZ">03</span></li>
+          <li data-page-node-id="iVItqIq8NUvLu85U8rOFNU"><span class="num" data-page-node-id="20rdMHzLYcYh8V0JgHUYEB">Ⅱ</span><span class="t" data-page-node-id="kgc3cP2MnGqScJAiw5Rbrq">改写</span><span class="e" data-page-node-id="12EEcWMiplRciByG1gKvc2">The Rewrite</span><span class="pg" data-page-node-id="apK17ZszR1RCM1ZJLWqSAS">04—06</span></li>
+          <li data-page-node-id="k5Cz8XadKVhpdueehiIYMr"><span class="num" data-page-node-id="s4inaoANmUOC9yg3RvSXnc">Ⅲ</span><span class="t" data-page-node-id="UVLDomYhP5qiQgdvfy0t3I">缺页</span><span class="e" data-page-node-id="76BlnIQOQNjF1RXH2Y9nfT">The Missing Page</span><span class="pg" data-page-node-id="uVECFXYklRV1UVtQfMNL0p">07</span></li>
+          <li data-page-node-id="s6J6ytzocjytO0NqXAvjcw"><span class="num" data-page-node-id="DdxwnEyEemstIophwAzOrK">Ⅳ</span><span class="t" data-page-node-id="fubU3rsg0Nt7lEbaOOZ84l">结算</span><span class="e" data-page-node-id="uM7eyBC1KUQDtxRmkj4J5O">The Reckoning</span><span class="pg" data-page-node-id="oAtTZ92HE2HXdCqHwXBsfw">08—10</span></li>
+        </ol>
+        <ul class="tl rise" style="--d:.28s" data-page-node-id="C1Pj9DCnEcIzW1353tPRxP">
+          <li data-page-node-id="VvaM0W34ljw6SWkG0PhXOo"><b data-page-node-id="jZIDGl0f3BZT6RcZ0P3Quu">1994</b><span data-page-node-id="1ux3lHXS4Y5xyfD7qtj6DK">第一次作案，他十七岁</span></li>
+          <li data-page-node-id="8o1Vmhe6RTFJOvM74ieArn"><b data-page-node-id="rZH6GraguU2H7aVzewVaB3">1998</b><span data-page-node-id="AN7u23L3CDtwj52OVp2Ww2">一审：死刑</span></li>
+          <li data-page-node-id="29go70yytZv4t5Na004bN6"><b data-page-node-id="FAPufz6iITGvBBxS2Lxs5A">1999</b><span data-page-node-id="4V9DEUlH199sf6VYtB7xLE">二审：改判死缓</span></li>
+          <li data-page-node-id="2hWVXkZ5suQf94lMSl2QCi"><b data-page-node-id="LHStRENEkCQeAqHdy5iYD1">2007</b><span data-page-node-id="WI14j3CYoEFWUBsH17aCHT">再审：有期徒刑二十年</span></li>
+          <li data-page-node-id="Sefbmblp5EeMSQpYfUq8vH"><b data-page-node-id="yxHJHnlc6AQFJkOV5MFiC1">2010</b><span data-page-node-id="Er3LXkn609skHmCRmQt4Nd">出狱，改名，经商</span></li>
+          <li class="key" data-page-node-id="iLtlfbOCp62AEeZsbyXPIG"><b data-page-node-id="VBv8iVCQYRrYjcMh4rSbfP">2019</b><span data-page-node-id="S0CaJdRMBej9LiF0qEfbNf">再审：死刑</span></li>
+          <li class="key" data-page-node-id="Rmv4KFaeRQDgit8awM0ux4"><b data-page-node-id="6bXGmRRhkk5WRPe4ShiMXl">2020</b><span data-page-node-id="6ORgcbBXlCvqKTBcUQES59">二月二十日，执行</span></li>
+        </ul>
+      </div>
+    </div>
+    <footer class="foot rise" style="--d:.36s" data-page-node-id="qaIJktHJ6YAU52I8IzdWqq">
+      <span class="mono" data-page-node-id="5rOAcP9ESZyv5rxwE7NDfH">原论：叙事建构 / Narrative Building</span>
+      <span class="mono hide-s" data-page-node-id="ReaDC4kRbKziJeh3MRKEMs">Contents &amp; Chronology</span>
+    </footer>
+  </section>
+
+  <!-- 03 ============ 三次作案 ============ -->
+  <section class="page page--dark" data-tone="dark" aria-label="三次作案" data-page-node-id="80KRrXOEtcXGGAGXw3kGy4">
+    <div class="grain" data-page-node-id="66KLe5GHuL3Ss1q4gAofjQ"></div>
+    <span class="ghost" data-page-node-id="wtQ7MnpT37bSmrXQsrx0zC">罪</span>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="TNrux7Bb5Wa3XqPG32HDur">
+      <span class="mono" data-page-node-id="qFwulRhAGgP5u9GiN3JhdB">Chapter Three · Three for a girl</span>
+      <span class="mono" data-page-node-id="Qw6b668e26NV4NGvBGkLfn">03 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="q3oVatkGvGa3dwpXyBlH2F">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="zcJhud4odwM6zKuwnFxvRM">三次作案，<em data-page-node-id="Hi6rvjvtNYcFdeb0lGwzn9">第一次他十七岁</em></h2>
+      <p class="lead rise" style="--d:.14s" data-page-node-id="xTZbPEWlOaa9MbtwzPIz5z">三名受害者，都是女性。童谣数到三，是给一个女孩的。</p>
+      <div class="ex-row" data-page-node-id="AKBGwhI2yJj3HvXRIXzMTn">
+        <div class="ex rise" style="--d:.22s" data-page-node-id="Ww2AMfXgLj2MC398oBwaDu">
+          <div class="idx" data-page-node-id="4XMvMxl1nxAUZE7EnSdXJL">01</div>
+          <div class="dt" data-page-node-id="1aTKT37HzM8AfyyYx0YX00">1994.10.16</div>
+          <p data-page-node-id="46mI6WD8Sf9FL9qEFJI0ng">环城南路。两名女青年被强行拉上轿车，驶至呈贡一处空房。</p>
+        </div>
+        <div class="ex rise" style="--d:.3s" data-page-node-id="e3LDhNPLdMVW3BaEZcXh2W">
+          <div class="idx" data-page-node-id="6ZvVSruAzTAbG6BL6d0j8b">02</div>
+          <div class="dt" data-page-node-id="1SuWua2ZryCanU1peKqEcF">1997.04</div>
+          <p data-page-node-id="xlTM6KVm6xUU346o2Z3sGJ">一名未成年少女遭其侵害。距上一次作案，不到三年。</p>
+        </div>
+        <div class="ex rise" style="--d:.38s" data-page-node-id="MjwHpMOSwYV0XQWMB6V04u">
+          <div class="idx" data-page-node-id="QX9BEZjmFKpJehCE1I2Kph">03</div>
+          <div class="dt" data-page-node-id="ue1IvN2lTcUGVjBQBPYo8o">1997.11.07</div>
+          <p data-page-node-id="YEkTiPePMBwnoqrXBe3QyO">两名少女被带进一间包房，殴打、侮辱，一人重伤。</p>
+        </div>
+      </div>
+      <p class="aside-note rise" style="--d:.46s" data-page-node-id="hJ2PHFMIxyVFBe65BmTbmB">一九九五年，他因第一起案子被判有期徒刑三年。他没有进监狱。</p>
+    </div>
+    <footer class="foot rise" style="--d:.54s" data-page-node-id="clbfWkmwUQKJERGlmhenFc">
+      <span class="mono" data-page-node-id="wI1q3Pz05qgvWVOTuhfeJH">原论：事实与叙述 / Fact and Narrative</span>
+      <span class="mono hide-s" data-page-node-id="mYppqQnA5c9QZ3AFE1qBeA">Three for a girl</span>
+    </footer>
+  </section>
+
+  <!-- 04 ============ 一审死刑 ============ -->
+  <section class="page page--paper" data-tone="paper" aria-label="一九九八年一审死刑" data-page-node-id="yrgTWxL2zbeSFE4wK76TV5">
+    <div class="grain" data-page-node-id="Dcc1GnTykWGrdivuWAdKON"></div>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="wxG1ANcF4jPdTeOuYdBEBj">
+      <span class="mono" data-page-node-id="30qzorDgoi4Dl1ZZ57EXtU">Chapter Four · Four for a boy</span>
+      <span class="mono" data-page-node-id="nFechKEmC1hOVxviNkUiwJ">04 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="n8i0a0WzYaE6qbnZoV8mBP">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="t8X2r3Sl2HVC8RiNjOj1yI">一九九八年，<em data-page-node-id="x39sjrmwE6I7wt6NKGtLzd">一审判他死刑</em></h2>
+      <div class="verdict" data-page-node-id="5RESRSMbtFrCN52vQB6YJb">
+        <div data-page-node-id="KENFqQvDRjnk6xNcaCuIVq">
+          <p class="lead rise" style="--d:.14s" data-page-node-id="rgtkYR0DNPsLTD2wGGiour">昆明市中级人民法院以四项罪名数罪并罚，判处死刑，剥夺政治权利终身。判决书上的理由是：犯罪手段残忍，后果严重。</p>
+          <ul class="charges rise" style="--d:.2s" data-page-node-id="BXI5oTpmhs6NyB7oQ1ZjQM">
+            <li data-page-node-id="7oGDXMdQ5EI48F6R7WpSCA">强奸罪</li><li data-page-node-id="YnS2DDSfSPCt5HC7ZpKVav">强制侮辱妇女罪</li><li data-page-node-id="yoxouytSVOfyt892jj6cBB">故意伤害罪</li><li data-page-node-id="zBfunVqK1KhymsaBJJSrew">寻衅滋事罪</li>
+          </ul>
+        </div>
+        <div class="stampbox rise" style="--d:.26s" data-page-node-id="dhbJjapuback2tuGpMvswh"><b data-page-node-id="boLZH46RizbwJBpqfAOTd1">死刑</b><span data-page-node-id="OpJr6lgZFwKmwjAuCpiwZJ">1998 · 一审</span></div>
+      </div>
+      <p class="lead rise" style="--d:.34s" data-page-node-id="0Sua89vqtHMZVA7ty9Fe2L">一年之后，云南省高级人民法院二审改判：<b data-page-node-id="y5KeU4pchTsuo8p8JtiMC4">死刑，缓期二年执行</b>。</p>
+    </div>
+    <footer class="foot rise" style="--d:.42s" data-page-node-id="Ecd79GxpF8XvEQTNDbrFbW">
+      <span class="mono" data-page-node-id="p0CEDjBmAqDbb8XhWa9ECx">原论：司法叙事 / Judicial Narrative</span>
+      <span class="mono hide-s" data-page-node-id="fw5QhA92BhV3DTKAWOUKGk">Four for a boy</span>
+    </footer>
+  </section>
+
+  <!-- 05 ============ 改判二十年 ============ -->
+  <section class="page page--dark" data-tone="dark" aria-label="改判二十年" data-page-node-id="aPLBD0dV5F7c6ESQcFxnaV">
+    <div class="grain" data-page-node-id="uTRgogvcMTr2Hb6Zyo0uaw"></div>
+    <span class="ghost" data-page-node-id="xMtPzxwz371hN6spUnI542">改</span>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="s6EhTk9DnnRnpMHaAVekN0">
+      <span class="mono" data-page-node-id="6fu9DOuHtzVUnRSHbzRYfz">Chapter Five · Five for silver</span>
+      <span class="mono" data-page-node-id="lD0i9zuewpFpA8vamHtK5e">05 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="2Qdg0Kb5JMSdAQRAPACrpS">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="uyNCjUFOnZiUSHM92LYu2s">一张纸，<em data-page-node-id="a1JMEHqWlj9HpqkAvEBjhP">把死刑改成了二十年</em></h2>
+      <p class="lead rise" style="--d:.14s" data-page-node-id="YcFn2BVSMOYxEqFnSZacwJ">死缓不等于自由。但从死缓到二十年，从二十年再到走出去，每一步都有人签字。</p>
+      <div class="chain" data-page-node-id="hMAxJhSZjzyqgWWd4Dd01q">
+        <div class="cell rise" style="--d:.22s" data-page-node-id="w4zpfHpuquYoao6Qd7qyZg">
+          <div class="y" data-page-node-id="oRmQUrYb7dAy2U1HebtHmF">1998</div><div class="v" data-page-node-id="44ATxUh0uxUpiaUUFp1ih2">死刑</div>
+          <div class="s" data-page-node-id="xTbci4CNW0cpM1DmfNjGDP">一审，剥夺政治权利终身</div>
+        </div>
+        <div class="arw rise" style="--d:.26s" data-page-node-id="ByAUEbNEdEnX2JoW2hP3zB">→</div>
+        <div class="cell rise" style="--d:.28s" data-page-node-id="4GeG56phWTuiXP77aC2eOE">
+          <div class="y" data-page-node-id="fu8Ce1awHNzyjrEbffxDs4">1999</div><div class="v" data-page-node-id="xPlnmG4j51jgQr4udJMEct">死缓</div>
+          <div class="s" data-page-node-id="qbVZS9R4GYMqrjE01CCfwx">二审改判，命保住了</div>
+        </div>
+        <div class="arw rise" style="--d:.32s" data-page-node-id="kz3DkmDay4g6JDqv7LXkP2">→</div>
+        <div class="cell hot rise" style="--d:.34s" data-page-node-id="DSzvOKN1ejSAMQoVKyYesn">
+          <div class="y" data-page-node-id="XFvol785iuShhY6bmCMIZI">2007</div><div class="v" data-page-node-id="r0HrfSkSCArqtr0KhG2wSh">二十年</div>
+          <div class="s" data-page-node-id="hDKhWemYJPTSPDYIrRVT4T">再审改判，刑期有了终点</div>
+        </div>
+      </div>
+      <div class="slip rise" style="--d:.44s" data-page-node-id="SlipCard001">
+        <div class="st" data-page-node-id="SlipCard002">Yunnan High People's Court · Retrial · 2007</div>
+        <p class="line" data-page-node-id="SlipCard003">主文：判处<del data-page-node-id="SlipCard004">死刑</del>，剥夺政治权利终身。</p>
+        <p class="hand" data-page-node-id="SlipCard005">二〇〇七年再审：改判有期徒刑二十年。理由——「重大立功」。</p>
+        <span class="stamp2" data-page-node-id="SlipCard006">改判</span>
+      </div>
+    </div>
+    <footer class="foot rise" style="--d:.52s" data-page-node-id="tOTwyCsuhC1URMaofJ2rZH">
+      <span class="mono" data-page-node-id="p9l94BzFfefKHwRiAr07HK">原论：书写权力 / The Power to Write</span>
+      <span class="mono hide-s" data-page-node-id="c0oKKtkdmhHRy7vJKvnmSk">Five for silver</span>
+    </footer>
+  </section>
+
+  <!-- 06 ============ 出狱 ============ -->
+  <section class="page page--paper" data-tone="paper" aria-label="出狱与改名" data-page-node-id="B5cCXWfIsVUKmQI9f4EWyI">
+    <div class="grain" data-page-node-id="UXmriFxwk1vVzeWHGWYfgS"></div>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="2RCaJsORauMbZfNPrhhn9Z">
+      <span class="mono" data-page-node-id="48U7r6bYj6oqd9IicutM2k">Chapter Six · Six for gold</span>
+      <span class="mono" data-page-node-id="KxB2PVTNfRR1m3PXaWkQhw">06 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="yUhzkNyEBDzHRMMOjBXRuv">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="B3KpiIEgnl6DKuUyF8tNZb">二〇一〇年四月，<em data-page-node-id="W99afS4US3M8e2Id2uWnmc">他出来了</em></h2>
+      <p class="lead rise" style="--d:.14s" data-page-node-id="TTvKINgluLhHO5kqoKVWxn">从一九九七年被抓到二〇一〇年出狱，他实际服刑十二年五个月。出来的时候，他有了一个新名字：李林宸。</p>
+      <div class="stats" data-page-node-id="SKiXUHxMFjM9hNxikowcNq">
+        <div class="stat rise" style="--d:.22s" data-page-node-id="eRXEcLGvZBIRcWtgumbMkK">
+          <div class="n" data-page-node-id="FlcCJFANswVNoGaAGKCfrN"><span data-num="12" data-page-node-id="IZIgpReVEHrMPqJALURAVC">12</span><small data-page-node-id="1RLYAGnDjAxEINw7BP3kZu">年 5 个月</small></div>
+          <div class="c" data-page-node-id="RpemgYPPFR68e6gXt3P7LT">实际服刑时间<br data-page-node-id="qD4UG9FZfR8EPUECU6zbZi">原判：死刑</div>
+        </div>
+        <div class="stat rise" style="--d:.3s" data-page-node-id="tu54Wu1NpQNDg2uvKmaIuj">
+          <div class="n" data-page-node-id="VgIzhAjJQcqao9vtyrAD4S"><span data-num="9" data-page-node-id="x0E3Ff5GHtr8pievbqlIC8">9</span><small data-page-node-id="5dYazARTEPD6yz5JWVLj7d">年</small></div>
+          <div class="c" data-page-node-id="F4AREA2lZw2PGne3u87H53">以「李林宸」的身份<br data-page-node-id="wRn4ViqEHcGXbIU79yrUIT">在昆明生活、经商</div>
+        </div>
+        <div class="stat rise" style="--d:.38s" data-page-node-id="6YVYmIkaGU40QhVPOOH9BK">
+          <div class="n" data-page-node-id="LjI0WuhJ44iQxDVMNVO3zw"><span data-num="1" data-page-node-id="MQOVWkTRXI396GSOY6E25T">1</span><small data-page-node-id="lXxyBhbfaeBwejGWA7B9eX">个名字</small></div>
+          <div class="c" data-page-node-id="0GHNcCFDlLQJ9hsxwSbCR7">工商登记、夜店、公司<br data-page-node-id="CnQJUEdbyamjBWBgKetzjW">都用这个名字</div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot rise" style="--d:.46s" data-page-node-id="jcBuRpLFTTJstcjwqV1qQB">
+      <span class="mono" data-page-node-id="gvKgUWThE1CokMd1zKbV4D">原论：身份与符号 / Identity as Symbol</span>
+      <span class="mono hide-s" data-page-node-id="TApIIbGuAl1U6ulJTD6JMS">Six for gold</span>
+    </footer>
+  </section>
+
+  <!-- 07 ============ 缺页 ============ -->
+  <section class="page page--dark" data-tone="dark" aria-label="缺失的一页" data-page-node-id="J4xismN1NaRajSz5qenxKn">
+    <div class="grain" data-page-node-id="WL4ahEAY6BSVqOZ5fahEHr"></div>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="0BH1DPZbbBgIJ9E8wGo1SC">
+      <span class="mono" data-page-node-id="mp5XCWhHvtKkkuPbrVr5fV">Chapter Seven · Seven for a secret never to be told</span>
+      <span class="mono" data-page-node-id="2zy7DC0WqhigfqV7owTv0v">07 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="NrApi4IyJnArJ29Z8sRo17">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="89iJF6uwP9tr8KzZ1aS6nm">本章<em data-page-node-id="sVH7C3ndVudmuZhyK4znWm">缺失</em></h2>
+      <div class="missing-wrap" data-page-node-id="4k8i05ljUuTocn4fkHCngk">
+        <div class="missing rise" style="--d:.16s" data-page-node-id="Ri65SVoCoIrnIwAGsqimMC">
+          <span class="tag" data-page-node-id="5k96nZC1rc8tSUNLrr81Z2">Page Missing · 2007</span>
+          <div class="t" data-page-node-id="5ibmfvT7ZQqlvERGZVQHF7">此 页 缺 失</div>
+          <p data-page-node-id="btJD9PX7GQ4pSQlMrKqEwc">那份让死刑变成二十年的再审裁定，理由只有四个字：重大立功。依据的材料，不在这卷里。</p>
+        </div>
+        <div class="patent rise" style="--d:.24s" data-page-node-id="qvnVr93L62Iv24iOkruLUy">
+          <span class="seal" data-page-node-id="aE5P2LIc4Hbo5Cj5L0jK8i">重大立功</span>
+          <div class="name" data-page-node-id="EpNEPsLFAceY5uyNPCBE1A">一种联动锁式<br data-page-node-id="xzONBysPALjUki9qh3uCyy">防盗窨井盖</div>
+          <div class="meta2" data-page-node-id="AlXMG8kSU9RApmxyZsoXjV">实用新型专利 · 以他的名义申请</div>
+        </div>
+      </div>
+      <p class="lead rise" style="--d:.34s" data-page-node-id="8R0KYNyKrLwJpfUC8WGo6t">缺的那一页，后来被一张证书补上了。服刑期间，这项「联动锁式防盗窨井盖」被认定为<b data-page-node-id="ELND4yahcYqseCMyp25PUN">重大立功</b>，成为减刑依据。复查时查明，这项专利并非由他本人发明。一个窨井盖换掉几年刑期——这不是隐喻，是裁定书上的理由。</p>
+    </div>
+    <footer class="foot rise" style="--d:.44s" data-page-node-id="fad9FTVCOfxzFBeq5D3vws">
+      <span class="mono" data-page-node-id="gKMpq6i2g3Rek9BZT8lnVJ">原论：符号兑换 / Symbolic Exchange</span>
+      <span class="mono hide-s" data-page-node-id="AFvChk4G2qOCt1lWFabav2">Seven for a secret</span>
+    </footer>
+  </section>
+
+  <!-- 08 ============ 2019 重启 ============ -->
+  <section class="page page--paper" data-tone="paper" aria-label="二〇一九年" data-page-node-id="VjJI0Dm9SvWFz66GhPKFHb">
+    <div class="grain" data-page-node-id="eOlz48omlADT5miL9B1v9X"></div>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="kXoVJJwsBMaIY0AkojAfkC">
+      <span class="mono" data-page-node-id="HgNzjz9ECHLhfi3m00OP81">Chapter Eight · Eight for a wish</span>
+      <span class="mono" data-page-node-id="HADp0JgMyneGUeghFCCOJg">08 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="i1ejhD4Wvcszsota1DQmLZ">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="f2AHrwo6EzuywZIqcKm3yB">二〇一九年，<em data-page-node-id="BoxD3l6AVeOnhVAIEPTulm">一枚指纹叫回了他的名字</em></h2>
+      <p class="lead rise" style="--d:.14s" data-page-node-id="TupTNcGTgrQ3Tw0TbMcF4V">三月，昆明警方在侦办一起案件时，采集了一名商人的生物信息。比对结果指向一九九八年那份死刑卷宗。</p>
+      <div class="steps" data-page-node-id="5cSMzGZ0ELOpuzwlgclFU0">
+        <div class="step rise" style="--d:.22s" data-page-node-id="ijtiT7QDSS5t4ilBzZhoeu">
+          <div class="k" data-page-node-id="WLrf3FwRx975Ax0ydFOXkZ">Step 01</div><div class="t" data-page-node-id="Wsqb0SdTOHeBAPgrdhgPgo">采集</div>
+          <p data-page-node-id="ibA3RDOKoWqMPMEENQW5sU">一起普通案件的例行采集，没有人知道他是谁。</p>
+        </div>
+        <div class="step rise" style="--d:.28s" data-page-node-id="W8s6MbtuRKaOecuR1o6Yoi">
+          <div class="k" data-page-node-id="5si87J8B39C3iDAu81S1wd">Step 02</div><div class="t" data-page-node-id="G9wr43VFYUkHkDHGaCxCRz">比对</div>
+          <p data-page-node-id="hVpMcEQfgwOcDfIYdHb4Ii">数据对上了二十一年前那份卷宗里的名字。</p>
+        </div>
+        <div class="step rise" style="--d:.34s" data-page-node-id="9wOvuDwE1EQJwYPpHA6PPM">
+          <div class="k" data-page-node-id="NmxXcMn3V3JdweLM6AEH73">Step 03</div><div class="t" data-page-node-id="3Po13obVnVdZmr4cr4t5rO">督办</div>
+          <p data-page-node-id="u4CLAKaFIG1HBr9yquDCsg">中央扫黑除恶督导组进驻云南，此案挂牌督办。</p>
+        </div>
+      </div>
+      <p class="lead name-line rise" style="--d:.42s" data-page-node-id="FB71Udqj5Uk7TkxmIUN8Py">他叫李林宸。他曾经叫<span class="rname" data-page-node-id="RName0001">孙小果<span class="bar" aria-hidden="true" data-page-node-id="RName0002"></span></span>。</p>
+    </div>
+    <footer class="foot rise" style="--d:.5s" data-page-node-id="WmPeOaDqYTr6LUnvTmbbPE">
+      <span class="mono" data-page-node-id="RnqlaW5NBkW4cr5Cu6bZQm">原论：可见性 / Visibility</span>
+      <span class="mono hide-s" data-page-node-id="DMDDdXhDM6QFVJ4ReXIixI">Eight for a wish</span>
+    </footer>
+  </section>
+
+  <!-- 09 ============ 十九个人 ============ -->
+  <section class="page page--dark" data-tone="dark" aria-label="十九个人" data-page-node-id="fLbTTSQbgFApOX5EN23RYi">
+    <div class="grain" data-page-node-id="7hsANZb07SaIkQuo1qgdXH"></div>
+    <span class="ghost" data-page-node-id="wVAr75qOGktCtnGxsv0qFr">伞</span>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="njBCWddr4jaP7kUyzdsV0X">
+      <span class="mono" data-page-node-id="dAWYCUoCS4a5qwGu7yNPU0">Chapter Nine · Nine for a kiss</span>
+      <span class="mono" data-page-node-id="DUjH6vM2hItC6UjZRFMUIB">09 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="LEt8vE0nGS5WP52Yh66lpK">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="IEz7TNSZ3iy6lTHMWWe9eZ">十九个人，<em data-page-node-id="kWd3fYqmwFDIBqyvZCLO1a">替他挡了二十年</em></h2>
+      <p class="lead rise" style="--d:.14s" data-page-node-id="iTREXBADk42dwRHQFIK1MH">二〇一九年十二月十五日，涉孙小果案的十九名公职人员与关系人一审宣判。母亲孙鹤予获刑二十年，继父李桥忠获刑十九年，其余十七人分别获刑。</p>
+      <div class="stats" data-page-node-id="KLde6mPgdUv5MDmVwylDzq">
+        <div class="stat rise" style="--d:.22s" data-page-node-id="MQoLfR8u1daldFplJPxE9N"><div class="n" data-page-node-id="H9DKrEwhOLWCxkQpqp4f6I"><span data-num="19" data-page-node-id="xdf8HvtXOQ6g4BWSPEorx0">19</span><small data-page-node-id="ERdMddYtMQVTKK0VVnhOvL">人</small></div><div class="c" data-page-node-id="rbqO12mACapIDnFF4pbwSE">覆盖公安、法院、监狱、检察</div></div>
+        <div class="stat rise" style="--d:.28s" data-page-node-id="zao3GQVwBlyRIoJEfYk5PI"><div class="n" data-page-node-id="JGyKnUuS3XrbyXtIZdTySh"><span data-num="20" data-page-node-id="W4XDCUmT85B16QHyJIkRM2">20</span><small data-page-node-id="eIEFMuNGeR29DkB4O3ZNho">年</small></div><div class="c" data-page-node-id="ibOUu5iUGYMyWAjPp9hSP7">母亲 孙鹤予<br data-page-node-id="BXHAI2c132lxZkAPk1inQ6">一审判决</div></div>
+        <div class="stat rise" style="--d:.34s" data-page-node-id="xuL3zvz0a9AInhlcrGV9gZ"><div class="n" data-page-node-id="gaH2ifKI1Oo5Y0cua1fbkG"><span data-num="19" data-page-node-id="IUrCU3sdyuGXZESnHnEFC2">19</span><small data-page-node-id="RmC4o3Ag3gQmzSIbnV7cTB">年</small></div><div class="c" data-page-node-id="LGxAbDJ56LRXzhvqmtqELQ">继父 李桥忠<br data-page-node-id="52BMt5Wtvqsn0ymJ52MLBL">一审判决</div></div>
+        <div class="stat rise" style="--d:.4s" data-page-node-id="fspp0u2U6sD5NyHTBMuMEk"><div class="n" data-page-node-id="8aFwjUbCdRgBqaoKwWJgtt"><span data-num="22" data-page-node-id="1WU65hNckeblxEhEMSztwv">22</span><small data-page-node-id="oSPYYUfnBX6tXDChECOaSg">年</small></div><div class="c" data-page-node-id="EkmYcctx2xRfuY6aGgyk8i">从一审死刑到执行<br data-page-node-id="A5nmV8vCix4ezoTE66nHot">一九九八 — 二〇二〇</div></div>
+      </div>
+      <p class="lead rise" style="--d:.48s" data-page-node-id="n3ZnBo8Qyh9A1K4ENWW8EO">十二月二十三日，再审改判死刑。二〇二〇年二月二十日，执行。</p>
+    </div>
+    <footer class="foot rise" style="--d:.56s" data-page-node-id="9wpFHjveCuNDLUSvmKTSBt">
+      <span class="mono" data-page-node-id="maF99chJVxrzriBkQLBguE">原论：保护伞 / Patronage Network</span>
+      <span class="mono hide-s" data-page-node-id="4sA3yxBqEi9oFp9viMkARg">Nine for a kiss</span>
+    </footer>
+  </section>
+
+  <!-- 10 ============ 资料来源 ============ -->
+  <section class="page page--paper" data-tone="paper" aria-label="资料来源" data-page-node-id="F6n8BC8JoW1nhoc81L8URc">
+    <div class="grain" data-page-node-id="uXvLFxuQmmzUW1G8vtlFJ4"></div>
+    <header class="topbar rise" style="--d:.02s" data-page-node-id="DFBSofjaR7JKx3av0P1dDS">
+      <span class="mono" data-page-node-id="mbRXLjNPvLBH6t3R9C0RgA">Chapter Ten · Ten for a bird you must not miss</span>
+      <span class="mono" data-page-node-id="liYY1F0N9vkx7ZOPLhQE9Z">10 / 10</span>
+    </header>
+    <div class="main" data-page-node-id="6fsqmNPRZCs8St3WPClXWE">
+      <h2 class="hl rise" style="--d:.08s" data-page-node-id="UBU01JsPPEhtxR0rgVzLPp">童谣数到十，<em data-page-node-id="3V8w8ZI5TR0uBwAYbJUlUH">是那只不能被漏掉的鸟</em></h2>
+      <ul class="srcs" data-page-node-id="xfRl3KepGVQLMZoZlEEhYb">
+        <li class="rise" style="--d:.14s" data-page-node-id="OznPy7cAskoKZHPw8vfuBJ"><span class="i" data-page-node-id="7o39DV3SaznuOB5ZhZnIYO">01</span><span class="x" data-page-node-id="PbnIPIkECvMX8XsdwAe3zt">云南省高级人民法院再审判决书（2019）</span></li>
+        <li class="rise" style="--d:.18s" data-page-node-id="30cWhVnvvyRh9bDlhcIUAC"><span class="i" data-page-node-id="FW9kQWCDi3UfQQsUS6ARK2">02</span><span class="x" data-page-node-id="w0MyeWG2kb8OrMBqFXLCyq">昆明市中级人民法院一审判决书（1998）</span></li>
+        <li class="rise" style="--d:.22s" data-page-node-id="VXJA2c213WQMp6nZC77kT7"><span class="i" data-page-node-id="7PbgF297uSPsCS41kNLznc">03</span><span class="x" data-page-node-id="b3t1X7wS7DiHGIj54EkWr4">中央纪委国家监委网站通报（2019.12）</span></li>
+        <li class="rise" style="--d:.26s" data-page-node-id="gECrax2PoYni7L8E8tNhF2"><span class="i" data-page-node-id="nmkaYdg3c1IBXQn9j5WI1e">04</span><span class="x" data-page-node-id="Rex4HORlzRbwr65J4fjmzn">新华社、人民日报、央视新闻相关报道（2019—2020）</span></li>
+      </ul>
+      <p class="lead rise" style="--d:.34s" data-page-node-id="8HJa6xxx8I5JwqImHl5BgH">本页只使用公开判决与公开报道中的事实。凡不能核实的细节，一律不写。</p>
+      <div class="sign-off rise" style="--d:.42s" data-page-node-id="Pijp34EAEfkRdOYeuZsyZl">
+        <span class="mono" data-page-node-id="P0ql4Jtkx2mJftDnVmlUVu">新闻传播学 · 2025106079 段佳慧 · 2026.11</span>
+        <span class="mono" data-page-node-id="QFszdOO6Ww8kyqtyFLTccI">十页 · 完</span>
+      </div>
+    </div>
+    <footer class="foot rise" style="--d:.5s" data-page-node-id="e9z4KERlEKeJqVI0OnfTBh">
+      <span class="mono" data-page-node-id="nQJYHiRJqGdqeuw8SNMXRz">原论：记忆与档案 / Memory and Archive</span>
+      <span class="mono hide-s" data-page-node-id="V95Ugi3bqlA1rU9mYctyni">Ten for a bird</span>
+    </footer>
+  </section>
+
+</main>
+
+<nav class="rail" id="rail" aria-label="翻页" data-page-node-id="Y0yZxLj5FMx56U1p4qATzK">
+  <span id="counter" data-page-node-id="VOBf0QOViR70PgRt9FtoxL">01 / 10</span>
+  <div class="ticks" id="ticks" data-page-node-id="98dG9WNEwSdUZX0ryoUOe9"></div>
+  <span class="grow" data-page-node-id="d7JjS0kfWhXPvdN9Clx8ub"></span>
+  <span class="hint" data-page-node-id="BAGpRTlKklV6qCMXmX0hi7">点击右侧 · 或按 → 翻页</span>
+  <button class="edbtn" id="edBtn" aria-pressed="false" title="显示/隐藏二〇一九年编者的页边批注" data-page-node-id="EdBtn0001">批注 OFF</button>
+  <button id="prev" aria-label="上一页" data-page-node-id="IfsVE84Z2hKyyu0rbDgD06">←</button>
+  <button id="next" aria-label="下一页" data-page-node-id="Lrd0oBhCabN6u9mCk9tX2v">→</button>
+</nav>
+
+<script>
+(function(){
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const ticks = document.getElementById('ticks');
+  const counter = document.getElementById('counter');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  let i = 0, lock = false;
+
+  pages.forEach(()=>ticks.appendChild(document.createElement('i')));
+
+  /* ---- 编者批注层：二〇一九年重读卷宗的人，写在页边的字 ---- */
+  const NOTES = {
+    '03':'一九九五年那次判三年，人没进去。第二次作案，距此不到三年。',
+    '04':'四项罪名，一个死刑。往后每一份文件，都在把这句话拆开。',
+    '05':'死缓、减刑、再减刑。程序一步没少走，只是每一步都往回走。',
+    '06':'十二年五个月，是他在里面的时间。判决书上写的是二十年。',
+    '07':'「重大立功」四个字，是那项专利换来的。发明人一栏，后来被查明是假的。',
+    '08':'名字换了，人没换。九年里，他就用这个名字在昆明做生意。',
+    '09':'十九个人，分布在公安、法院、检察、监狱。这道链条上，没有一环是空的。'
+  };
+  pages.forEach((p,n)=>{
+    const k = String(n+1).padStart(2,'0');
+    if(!NOTES[k]) return;
+    const as = document.createElement('aside');
+    as.className = 'marginalia';
+    const t = document.createElement('span');
+    t.className = 'mno';
+    t.textContent = "Editor's note · 二〇一九";
+    const b = document.createElement('p');
+    b.textContent = NOTES[k];
+    as.append(t,b);
+    p.appendChild(as);
+  });
+
+  const edBtn = document.getElementById('edBtn');
+  function setEd(on){
+    document.documentElement.classList.toggle('editor',on);
+    edBtn.setAttribute('aria-pressed',on?'true':'false');
+    edBtn.textContent = on ? '批注 ON' : '批注 OFF';
+  }
+  try{ setEd(localStorage.getItem('a4-ed')==='1'); }catch(e){ setEd(false); }
+  edBtn.addEventListener('click',e=>{
+    e.stopPropagation();
+    const on = !document.documentElement.classList.contains('editor');
+    setEd(on);
+    try{ localStorage.setItem('a4-ed', on?'1':'0'); }catch(e){}
+  });
+  if(/[?&]ed=1/.test(location.search)) setEd(true);
+
+  function countUp(page){
+    page.querySelectorAll('[data-num]').forEach(el=>{
+      const to = +el.dataset.num;
+      if(!to) return;
+      const t0 = performance.now(), dur = 1100;
+      function step(t){
+        const p = Math.min(1,(t-t0)/dur);
+        const e = 1 - Math.pow(1-p,3);
+        el.textContent = Math.round(to*e);
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  function render(animateNumbers){
+    pages.forEach((p,n)=>p.classList.toggle('is-active',n===i));
+    Array.from(ticks.children).forEach((t,n)=>t.classList.toggle('on',n===i));
+    document.body.dataset.tone = pages[i].dataset.tone || 'dark';
+    counter.textContent = String(i+1).padStart(2,'0') + ' / 10';
+    prev.disabled = i===0;
+    next.disabled = i===pages.length-1;
+    const h = '#' + (i+1);
+    if(location.hash !== h) history.replaceState(null,'',h);
+    if(animateNumbers && !staticMode) countUp(pages[i]);
+  }
+
+  function go(n){
+    n = Math.max(0,Math.min(pages.length-1,n));
+    if(n===i || lock) return;
+    lock = true;
+    const cur = pages[i], nxt = pages[n];
+    cur.classList.remove('is-active');
+    cur.classList.add('is-out');
+    setTimeout(()=>cur.classList.remove('is-out'), 760);
+    i = n;
+    nxt.classList.remove('is-out');
+    void nxt.offsetWidth;
+    render(true);
+    setTimeout(()=>{ lock = false; }, 400);
+  }
+
+  prev.addEventListener('click',e=>{e.stopPropagation();go(i-1)});
+  next.addEventListener('click',e=>{e.stopPropagation();go(i+1)});
+
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}
+    if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(i-1)}
+    if(e.key==='Home')go(0);
+    if(e.key==='End')go(pages.length-1);
+  });
+
+  document.getElementById('deck').addEventListener('click',e=>{
+    if(e.target.closest('button,a'))return;
+    if(e.clientX < window.innerWidth*0.24) go(i-1); else go(i+1);
+  });
+
+  let wt = 0;
+  addEventListener('wheel',e=>{
+    const now = Date.now();
+    if(now - wt < 820) return;
+    if(Math.abs(e.deltaY) < 14) return;
+    wt = now;
+    go(i + (e.deltaY>0?1:-1));
+  },{passive:true});
+
+  let sx=null, sy=null;
+  addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  addEventListener('touchend',e=>{
+    if(sx===null)return;
+    const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)) dx<0?go(i+1):go(i-1);
+    sx=null;
+  },{passive:true});
+
+  const h0 = parseInt(location.hash.slice(1),10);
+  const jump = (!isNaN(h0) && h0>=1 && h0<=pages.length) ? h0-1 : 0;
+  const staticMode = /[?&]static/.test(location.search);
+  if(staticMode) document.documentElement.classList.add('static');
+
+  const intro = document.getElementById('intro');
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(jump !== 0 || reduce || staticMode){
+    if(intro) intro.remove();
+    document.documentElement.classList.add('is-open');
+  }else{
+    document.documentElement.classList.add('with-intro');
+    setTimeout(()=>document.documentElement.classList.add('is-open'), 1150);
+    setTimeout(()=>{ if(intro && intro.parentNode) intro.remove(); }, 2600);
+  }
+
+  i = jump;
+  render(false);
+  if(jump !== 0 && !staticMode) countUp(pages[i]);
+})();
+</script>
+</body>
+</html>
